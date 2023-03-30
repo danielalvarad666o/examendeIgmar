@@ -38,14 +38,12 @@ Route.group(() => {
 
 
 
-//Route.post('/logout', 'UsersController.logout').middleware('auth:api')
+Route.delete('/logout', 'UsersController.logout').middleware('auth')
 
-Route.post('/logout', async ({ auth }) => {
-  await auth.use('api').revoke()
-auth.use('api').isLoggedOut
 
-  
-  return {
-    revoked: true
-  }
-})
+Route.group(() => {
+Route.post('/iniciarPartida', 'EnfrentamientosController.crearEnfrentemiento').middleware('auth')
+}
+).prefix('/Batallanaval')
+
+

@@ -74,3 +74,11 @@ export default class AuthMiddleware {
     await next()
   }
 }
+
+
+//Esta ruta sólo se podrá acceder si el usuario ha iniciado sesión y está autenticado.
+
+
+
+
+

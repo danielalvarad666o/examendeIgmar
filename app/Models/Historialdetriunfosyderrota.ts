@@ -1,26 +1,19 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class User extends BaseModel {
+export default class Historialdetriunfosyderrota extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
   @column()
-  public nombre:string
-
- 
+  public enfrentamiento_id:number
 
   @column()
-  public email:string
-
-  
-
+  public usuario_ganador_id:number
 
   @column()
-  public password:string
+  public usuario_perdedor_id:number
 
-  
- 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

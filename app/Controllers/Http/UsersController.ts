@@ -15,14 +15,14 @@ public async crearUsuarios ( { request, response }:HttpContext){
           rules.maxLength(255),
         ]),
       
-        correo: schema.string({ trim: true, escape: true }, [
+        email: schema.string({ trim: true, escape: true }, [
           rules.required(),
           rules.minLength(3),
           rules.maxLength(255),
           rules.email(),
           rules.unique({ table: "users", column: "email" }),
         ]),
-        contraseña: schema.string({}, [rules.required(), rules.minLength(8)]),
+        password: schema.string({}, [rules.required(), rules.minLength(8)]),
   
       });
       try {
@@ -35,35 +35,35 @@ public async crearUsuarios ( { request, response }:HttpContext){
             "nombre.string": "El nombre debe ser un texto",
             "nombre.minLength": "El nombre debe tener al menos 3 caracteres",
             "nombre.maxLength": "El nombre debe tener como máximo 50 caracteres",
-            "correo.required": "El email es requerido",
-            "correo.string": "El email debe ser un texto",
-            "correo.email": "El email debe ser un email válido",
-            "correo.unique": "El email ya está en uso",
+            "email.required": "El email es requerido",
+            "email.string": "El email debe ser un texto",
+            "email.email": "El email debe ser un email válido",
+            "email.unique": "El email ya está en uso",
   
-            "contraseña.required": "La contraseña es requerida",
-            "contraseña.string": "La contraseña debe ser un texto",
-            "contraseña.minLength":
+            "password.required": "La contraseña es requerida",
+            "password.string": "La contraseña debe ser un texto",
+            "password.minLength":
               "La contraseña debe tener al menos 8 caracteres",
-            "contraseña.maxLength":
+            "password.maxLength":
               "La contraseña debe tener como máximo 50 caracteres",
   
          
           },
         });
-        const { nombre, correo, contraseña } = data;
+        const { nombre, email, password } = data;
         const user = new User();
         
-        user.email=correo;
-        user.nombres=nombre;
+        user.email=email;
+        user.nombre=nombre;
         
         
-        user.password= await Hash.make(contraseña);
+        user.password= await Hash.make(password);
         
         await user.save();
 
         return response.status(201).json({
             message:"Usuario registrado",
-            user: user.nombres,
+            user: user.nombre,
             email: user.email
         });
 
@@ -141,7 +141,7 @@ public async logout({ response, auth }: HttpContextContract) {
     console.error(error);
     return response.status(400).json({
       message: "Error al cerrar sesión",
-      data: error.message,
+      data: error,
     });
   }
 }
