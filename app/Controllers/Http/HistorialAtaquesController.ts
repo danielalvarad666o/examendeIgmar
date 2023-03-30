@@ -68,4 +68,18 @@ public async guardarAtaques({ request, response }:HttpContextContract){
 
 }
 
+public async streamAtaques({response}){
+  const stream=response.response;
+  stream.writeHead(200,{
+    "Access-Control-Allow-Origin":"*",
+    "Content-Type": "text/event-stream",
+    "Cache-Control": "no-cache",
+    "Connection": "keep-alive",
+  });
+  Event.on("Ataques", (historialAtaque) => {
+    stream.write(`event: Ataques\ndata: ${JSON.stringify(historialAtaque)}\n\n`);
+    console.log('Se recibió un nuevo Ataque:', historialAtaque);
+  });  
+}
+
 }
