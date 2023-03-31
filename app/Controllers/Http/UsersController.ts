@@ -106,6 +106,8 @@ public async login({ auth, request, response }: HttpContextContract) {
 
     const user = await User.findByOrFail('email', email);
 
+    console.log(user)
+
     if (!(await Hash.verify(user.password.toString(), password))) {
       return response.unauthorized('Invalid credentials');
     }

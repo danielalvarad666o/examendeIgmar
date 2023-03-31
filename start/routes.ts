@@ -42,9 +42,12 @@ Route.delete('/logout', 'UsersController.logout').middleware('auth')
 
 
 Route.group(() => {
-Route.post('/iniciarPartida', 'EnfrentamientosController.crearEnfrentemiento')
+Route.post('/iniciarPartida', 'EnfrentamientosController.crearPartida')
 Route.post('/ataques', 'HistorialAtaquesController.guardarAtaques')
 Route.post('/ganador','historialdetriunfosyderrotas.ganador')
+Route.get('/partidas','EnfrentamientosController.partidaslibres')
+Route.put('/unir/:id', 'EnfrentamientosController.unirte')
+Route.put('/partidallena/:id', 'EnfrentamientosController.partidaenuso')
 }
 ).prefix('/batallanaval').middleware('auth')
 

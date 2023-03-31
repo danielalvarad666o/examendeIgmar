@@ -5,6 +5,12 @@ export default class Enfrentamiento extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
+@column()
+public nombre:string
+
+@column()
+public status:number
+
   @column()
   public id_usuario1: number
 
